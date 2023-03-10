@@ -1,0 +1,182 @@
+<link rel="stylesheet" href="estilos.css">
+<section class="perfil-usuario">
+    <div class="contenedor-perfil">
+        <div class="portada-perfil" style="background-image: url('../images/FONDOR3.png');">
+            <div class="sombra"></div>
+            <div class="avatar-perfil">
+                <img src="../fotos/<%= persona[0].foto %>" alt="img"> 
+
+            </div>
+            <div class="datos-perfil">
+                <h4 class="titulo-usuario">
+                    <%= persona[0].nombre +" "+ persona[0].apellido %></h4>
+                
+            </div>
+        </div>
+        <div class="menu-perfil">
+            <ul>
+
+            </ul>
+        </div>
+        <section class="Form my-4 mx-5">
+            <div class="container">
+                <form novalidate>
+                    <div class="row no-gutters g-3 px-3 pt-3">
+                        <h4 class=" font-weight-bold py-3 px-3 pt-3">Datos Personales</h4>
+                        <div class="col-sm-6 px-3 pt-3">
+                            <label for="correo" class="form-label">Nombre de usuario</label>
+                            <input type="text" class="form-control" value="<%= cuenta[0].correo %>" disabled>
+                            <br>
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" placeholder="" value="<%= persona[0].nombre %>"
+                                disabled>
+                            <br>
+                            <label for="apellido" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" placeholder="" value="<%= persona[0].apellido %>"
+                                disabled>
+                            <% if (rol=="Estudiante" ) { %>
+                                <br>
+                                <label for="ciclo" class="form-label">Ciclo</label>
+                                <select disabled>
+                                    <option value="">
+                                        <%= persona[0].ciclo %>
+                                    </option>
+                                </select>
+                                <br>
+                                <label for="paralelo" class="form-label">Paralelo</label>
+                                <select disabled>
+                                    <option value="">
+                                        <%= persona[0].paralelo %>
+                                    </option>
+                                </select>
+                                <% } %>
+                        </div>
+                        <div class="col-sm-6 px-3 pt-3">
+
+                            <label for="rol" class="form-label">Rol</label>
+                            <input type="text" class="form-control text-center" placeholder=""
+                                value="<%= persona[0].rol %>" disabled>
+                            <br>
+                            <label for="codigo" class="form-label">Codigo Acceso</label>
+                            <input type="text" class="form-control text-center" placeholder=""
+                                value="<%= persona[0].codigo_acceso %>" disabled>
+
+                        </div>
+
+                        <div class="form-row px-3 pt-3 text-center">
+
+                            <div class="col-lg-7 text-center">
+
+                                <button type="button" id="editar" class="" data-toggle="modal"
+                                    data-target="#exampleModalLong">
+                                    Modificar
+                                </button>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Datos Personales</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="" action="/modificar/perfil" method="Post" id="formRecursosM" enctype="multipart/form-data">
+                <input type="text" hidden name="idPerfil" value="<%= persona[0]._id %>" id="idPerfil">
+                <input type="text" hidden name="tiporol" value="<%= rol %>" id="tiporol">
+                <div class="modal-body">
+                    <div class="tuto_container">
+                        <div class="tuto_card">
+                            <div class="imgBx">
+                                <div class="container_colum">
+                                    <div class="col-sm-6 px-3 pt-3">
+                                        <label for="correo" class="form-label">Nombre de usuario</label>
+                                        <input id="correo" name="correo" type="text" class="form-control"
+                                            value="<%= cuenta[0].correo %>" disabled>
+                                        <br>
+                                        <label for="nombre" class="form-label">Nombre</label>
+                                        <input id="nombre" name="nombre" type="text" class="form-control" placeholder=""
+                                            value="<%= persona[0].nombre %>">
+                                        <br>
+                                        <label for="apellido" class="form-label">Apellido</label>
+                                        <input id="apellido" name="apellido" type="text" class="form-control"
+                                            placeholder="" value="<%= persona[0].apellido %>">
+                                        <% if (rol=="Estudiante" ) { %>
+                                            <br>
+                                            <label for="ciclo" class="form-label">Ciclo</label>
+                                            <select name="ciclo" id="ciclo">
+                                                <option value="Quinto Ciclo">Quinto Ciclo</option>
+                                                <option value="Sexto Ciclo">Sexto Ciclo</option>
+                                                <option value="Séptimo Ciclo">Séptimo Ciclo</option>
+                                                <option value="Octavo Ciclo">Octavo Ciclo</option>
+                                                <option value="Noveno Ciclo">Noveno Ciclo</option>
+                                                <option value="Decimo Ciclo">Decimo Ciclo</option>
+                                            </select>
+                                            <br>
+                                            <label for="paralelo" class="form-label">Paralelo</label>
+                                            <select name="paralelo" id="paralelo">
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                                <option value="C">C</option>
+                                                <option value="D">D</option>
+                                            </select>
+                                            <% } %>
+                                    </div>
+                                    <div class="col-sm-6 px-3 pt-3">
+
+                                        <label for="rol" class="form-label">Rol</label>
+                                        <input id="rol" type="text" class="form-control text-center" placeholder=""
+                                            value="<%= persona[0].rol %>" disabled>
+                                        <br>
+                                        <label for="codigo" class="form-label">Codigo Acceso</label>
+                                        <input id="codigo" type="text" class="form-control text-center" placeholder=""
+                                            value="<%= persona[0].codigo_acceso %>" disabled>
+                                        <br>
+                                        <label for="archivo"></label>
+                                        <div class="tuto_container">
+                                            <div class="tuto_card">
+                                                <div class="imgBx">
+                                                    <div class="container_colum_foto">
+                                                        <label for="archivo" class="form-label">Imagen</label>
+                                                        <h2 id="texto-imagen1" hidden></h2>
+                                                        <img id="add-foto1" src="../fotos/<%= persona[0].foto %>" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <input style="padding-top: 5px;" type="file" name="archivo" id="archivo">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="submit">Modificar Perfil</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!--====  End of tarjeta  ====-->
+
+<script>
+    $(document).on('click', '#editar', function () {
+        document.getElementById('ciclo').value = '<%= persona[0].ciclo %>';
+        document.getElementById('paralelo').value = '<%= persona[0].paralelo %>';
+    })
+</script>

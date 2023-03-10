@@ -1,0 +1,100 @@
+<div class="main-content">
+    <div class="container mt-7">
+        <!-- Table -->
+        <div class="row">
+
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <h3 class="mb-0">Lista de Estudiantes</h3>
+                        <div class="d-flex flex-row-reverse bd-highlight"></div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table align-items-center table-flush" id="tabla">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Nrº</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Apellido</th>
+                                    <th scope="col">Ciclo</th>
+                                    <th scope="col">Paralelo</th>
+                                    <th scope="col">Codigo</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- si el tamanio de palabra no es mayor a cero presenta el else  -->
+                                <% if(estudiantes.length> 0) {%>
+                                    <% estudiantes.forEach(function(item, index) { %>
+                                        <tr>
+                                            <!-- <th scope="row"></th> -->
+                                            <td>
+                                                <%= (index + 1) %>
+                                            </td>
+                                            <td>
+                                                <%= item.nombre %>
+                                            </td>
+                                            <td>
+                                                <%= item.apellido %>
+                                            </td>
+                                            <td>
+                                                <%= item.ciclo %>
+                                            </td>
+                                            <td>
+                                                <%= item.paralelo %>
+                                            </td>
+                                            <td>
+                                                <%= item.codigo_acceso %>
+                                            </td>
+                                            <td>
+                                                <a href="/lista_estudiantes/progreso/<%= item.codigo_acceso %>"><i title="Ver Listado Niños(as)" class="fa-solid fa-eye"></i></a>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                            <% } else { %>
+                                                <td></td>
+                                                <td></td>
+                                                <td>No existen datos</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <% } %>
+                                                
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+     $(document).ready(function () {
+        
+        $('#tabla').DataTable({
+            language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Pri",
+                    "last": "Ult",
+                    "next": "Sig",
+                    "previous": "Ant"
+                }
+            },
+        });
+    });
+
+</script>

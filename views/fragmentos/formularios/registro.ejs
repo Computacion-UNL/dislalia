@@ -1,0 +1,106 @@
+<a href="/" class="button" style="margin: 10px;">Volver al inicio</a>
+<div class="container">
+  <div class="title">Registro de Docente</div>
+  <div class="content">
+    <form action="/registrar" method="POST" name="formDatosPersonales" id="formDatosPersonales" enctype="multipart/form-data">
+      <div class="user-details">
+        <div class="input-box">
+          <span class="details">Nombre</span>
+          <input type="text" name="nombre" id="nombre" placeholder="Ingrese su nombre" required>
+        </div>
+        <div class="input-box">
+          <span class="details">Apellido</span>
+          <input type="text" name="apellido" id="apellido" placeholder="Ingrese su apellido" required>
+        </div>
+        <div class="input-box">
+          <span class="details">Correo</span>
+          <input type="text" name="usuario" id="usuario" placeholder="example@unl.edu.ec" required>
+        </div>
+        <div class="input-box">
+          <span class="details">Contraseña</span>
+          <input type="password" name="password" id="password" placeholder="Ingrese su contraseña" required>
+        </div>
+        <div class="input-box">
+          <div class="tuto_container">
+            <div class="tuto_card">
+              <div class="imgBx">
+                <div class="container_colum_foto">
+                  <span class="details">Imagen</span>
+                  <h2 id="texto-imagen1" hidden></h2>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+        <input style="padding-top: 5px;" type="file" name="archivo" id="archivo">
+        </div>
+      </div>
+      <div class="button-registro">
+        <input type="submit" value="Registrar">
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+
+  $(document).ready(function () {
+
+    $.validator.addMethod("soloLetras", function (value, element) {
+      return this.optional(element) || /^[a-z\s.A-Z]+$/i.test(value);
+    }, "Ingrese solo letras");
+
+    $.validator.addMethod("correoUniversitario", function (value, element) {
+      return this.optional(element) || /^[a-z.]+@unl\.edu\.ec$/i.test(value);
+    }, "Correo Institucional Incorrecto!");
+
+    $.validator.addMethod("caracteresPermitidos", function (value, element) {
+      return this.optional(element) || /^(.*?[A-Z]).(.*?[a-z]).(.*?[0-9])$/i.test(value);
+    }, "Debe contener una mayúscula, una minúscula y un número!");
+
+
+    $("#formDatosPersonales").validate({
+      rules: {
+        nombre: {
+          required: true,
+          soloLetras: true,
+          minlength: 3
+        },
+        apellido: {
+          required: true,
+          soloLetras: true,
+          minlength: 3
+        },
+        usuario: {
+          required: true,
+          correoUniversitario: true
+        },
+        password: {
+          required: true,
+          minlength: 8,
+          caracteresPermitidos: true
+        },
+
+      },
+      messages: {
+        nombre: {
+          required: "Este campo es requerido!",
+          minlength: "Ingrese al menos 3 caracteres"
+        },
+        apellido: {
+          required: "Este campo es requerido!",
+          minlength: "Ingrese al menos 3 caracteres"
+        },
+        usuario: {
+          required: "Este campo es requerido!",
+          email: "Ingrese su correo institucional"
+        },
+        password: {
+          required: "Este campo es requerido!",
+          minlength: "La contraseña debe tener al menos 8 caractéres!"
+        }
+      }
+    });
+  });
+
+</script>

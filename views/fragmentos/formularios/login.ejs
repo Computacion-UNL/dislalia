@@ -1,0 +1,78 @@
+<div class="container_login">
+  <div class="wrapper">
+    <div class="title"><span>Inicia Sesión</span></div>
+    <form action="/iniciar_sesion" method="POST" id="formularioLogin">
+      <div class="row_login">
+        <i class="fas fa-user"></i>
+        <input type="text" name="usuario" id="usuario" placeholder="Correo Institucional" required>
+      </div>
+      <br>
+      <div class="row_login">
+        <i class="fas fa-lock"></i>
+        <input type="password" name="password" id="password" placeholder="Contraseña" required>
+      </div>
+      <h5 style="text-align: right;"><a href="/reset_password"><u>¿Olvidaste tu contraseña?</u></a></h5>
+      <h5 style="text-align: right;"><a href="/registro_estudiantes"><u>Registrarse</u></a></h5>
+      <div class="row_login button_login">
+        <input type="submit" value="Ingresar">
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+
+  /**
+    validar datos de los formularios
+    **/
+  // $(document).ready(function () {
+
+  //   $.validator.addMethod("soloLetras", function (value, element) {
+  //     return this.optional(element) || /^[a-z\s.A-Z]+$/i.test(value);
+  //   }, "Ingrese solo letras");
+
+  //   $.validator.addMethod("correoUniversitario", function (value, element) {
+  //     return this.optional(element) || /^[a-z.]+@unl\.edu\.ec$/i.test(value);
+  //   }, "Correo Institucional Incorrecto!");
+
+  //   $.validator.addMethod("caracteresPermitidos", function (value, element) {
+  //     return this.optional(element) || /^(.*?[A-Z]).(.*?[a-z]).(.*?[0-9])$/i.test(value);
+  //   }, "Debe contener una mayúscula, una minúscula y un número!");
+
+
+  //   $("#formularioLogin").validate({
+  //     rules: {
+  //       nombre: {
+  //         required: true,
+  //         soloLetras: true
+  //       },
+  //       apellido: {
+  //         required: true,
+  //         soloLetras: true
+  //       },
+  //       usuario: {
+  //         required: true,
+  //         correoUniversitario: true
+  //       },
+  //       password: {
+  //         required: true,
+  //         minlength: 8,
+  //         caracteresPermitidos: true
+  //       },
+
+  //     },
+  //     messages: {
+  //       usuario: {
+  //         required: "Este campo es requerido!",
+  //         email: "Ingrese su correo institucional"
+  //       },
+  //       password: {
+  //         required: "Este campo es requerido!",
+  //         minlength: "La contraseña debe tener al menos 8 caractéres!"
+  //       }
+  //     }
+  //   });
+  // });
+
+
+</script>

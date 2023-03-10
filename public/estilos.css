@@ -1,0 +1,63 @@
+audio {
+  width: 150px;
+}
+
+.container_colum {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.container_colum_foto {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 50%;
+}
+
+.container_colum>div {
+  width: 50%;
+  padding: 6px;
+}
+
+.estilosimagenes {
+  display: flex;
+  width: 850px;
+  height: 430px;
+}
+
+.estilosimagenes img {
+  width: 0px;
+  flex-grow: 1;
+  object-fit: cover;
+  opacity: .8;
+  transition: .5s ease;
+}
+
+.estilosimagenes img:hover {
+  cursor: crosshair;
+  width: 300px;
+  opacity: 1;
+  filter: contrast(120%);
+}
+
+.card {
+  margin-bottom: 10px;
+}
+.car{
+  background-color: #f0efef;
+}
+
+.color {
+  background-color: rgba(240,239,239,1);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: flex;
+
+}
+.canvas {
+  height: 300px;
+  width: 200px;
+}

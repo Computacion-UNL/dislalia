@@ -1,0 +1,327 @@
+<div class="main-content">
+    <div class="container mt-7">
+        <!-- Table -->
+        <div class="row">
+
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <h3 class="mb-0">Lista de Recursos</h3>
+                        <div class="d-flex flex-row-reverse bd-highlight">
+                            <button type="button" class="" data-toggle="modal" data-target="#exampleModal">
+                                Nuevo Recurso
+                            </button>
+
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table align-items-center table-flush" id="table_id">
+                            <thead class="thead-light">
+                                <% if(tipo == "ninguno") {%>
+                                    <tr>
+                                        <th scope="col">Nrº</th>
+                                        <th scope="col">Palabra</th>
+                                        <th scope="col">Contiene R</th>
+                                        <th scope="col">Imagen</th>
+                                        <th scope="col">Opciones</th>
+                                    </tr>
+                                <% } else {%> 
+                                    <tr>
+                                        <th scope="col">Nrº</th>
+                                        <th scope="col">Palabra</th>
+                                        <th scope="col">Contiene R</th>
+                                        <th scope="col">Imagen</th>
+                                        <th scope="col">Pronunciación</th>
+                                        <th scope="col">Opciones</th>
+                                    </tr>
+                                <% } %>
+                            </thead>
+                            <tbody>
+                                <!-- si el tamanio de palabra no es mayor a cero presenta el else  -->
+                                <% if(palabra.length> 0 && tipo != "ninguno") {%>
+                                    <% palabra.forEach(function(item, index) { %>
+                                        <tr>
+                                            <!-- <th scope="row"></th> -->
+                                            <td>
+                                                <%= (index + 1) %>
+                                            </td>
+                                            <td style="text-align: justify;">
+                                                <%= item.texto %>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <% if (item.contieneR) { %>
+                                                    <i class="fa-solid fa-check"></i>
+                                                <% } else { %> 
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                <% } %>
+                                            </td>
+                                            <td>
+                                                <div class="media align-items-center">
+                                                    <a href="#" class="avatar rounded-circle">
+                                                        <img src="/imagenes/<%= item.imagen %>" alt="Image placeholder">
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="media align-items-center">
+                                                    <audio controls src="/audio/<%= item.audio %>"></audio>
+                                                </div>
+
+                                            </td>
+
+                                            <td style="text-align: center;">
+                                                <a onclick="buscardatos('<%= item._id %>')" data-toggle="modal" data-target="#exampleModalLong"><i title="Modificar Recurso" class="fa-solid fa-pen-to-square"></i></a>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                <% } else {%>
+                                    <% palabra.forEach(function(item, index) { %>
+                                        <tr>
+                                            <!-- <th scope="row"></th> -->
+                                            <td>
+                                                <%= (index + 1) %>
+                                            </td>
+                                            <td style="text-align: justify;">
+                                                <%= item.texto %>
+                                            </td>
+                                            <td>
+                                                <% if (item.contieneR) { %>
+                                                    <i class="fa-solid fa-check"></i>
+                                                <% } else { %> 
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                <% } %>
+                                            </td>
+                                            <td>
+                                                <div class="media align-items-center">
+                                                    <a href="#" class="avatar rounded-circle">
+                                                        <img src="/imagenes/<%= item.imagen %>" alt="Image placeholder">
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <a onclick="buscardatos('<%= item._id %>')" data-toggle="modal" data-target="#exampleModalLong"><i title="Modificar Recurso" class="fa-solid fa-pen-to-square"></i></a>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ingresar Recurso</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="" action="/recurso" method="Post" id="formRecursos" enctype="multipart/form-data">
+
+                <div class="modal-body">
+                    <div class="tuto_container">
+                        <div class="tuto_card">
+                            <div class="imgBx">
+                                <div class="container_colum">
+                                    <div>
+                                        <label for="tipo">Tipo Recurso:</label>
+                                        <select name="tipo" id="tipo">
+                                            <option value="palabra">Palabra</option>
+                                            <option value="trabalenguas">Trabalenguas</option>
+                                        </select>
+                                        <br>
+                                        <label for="texto">Recurso:</label>
+                                        <textarea name="texto" id="texto" style="height: 100px;"
+                                            placeholder="Ingrese la Palabra o Trabalenguas"></textarea>
+                                        <br>
+                                        <label for="sicontiene">Marque si es palabra con r:</label>
+                                        <input type="checkbox" name="sicontiene" id="sicontiene" value="true"><label
+                                            for="sicontiene">Si</label>
+                                        <br><br>
+                                        <label for="" id="dificultadT"></label>
+                                        <label id="titulo" for="dificultad">Posición de la R:</label>
+                                        <select name="dificultad" id="dificultad">
+                                            <option value="ninguno">No Incluye R</option>
+                                            <option value="inicial">Posición Inicial</option>
+                                            <option value="media">Posición Media</option>
+                                            <option value="final">Posición Final</option>
+                                            <option value="inversa">Posición Inversa</option>
+                                            <option value="doble">Posición Doble</option>
+                                            <option value="mixta">Posición Mixta</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <h2 id="texto-imagen1" hidden></h2>
+                                        <br>
+                                        <label for="archivo">Imagen</label>
+                                        <input type="file" name="archivo" id="archivo"
+                                            accept=".jpg, .jpeg">
+                                        <br>
+                                        <br>
+                                        <label for="audio" id="titleAudio">Subir audio</label>
+                                        <input lang="es" type="file" name="audio" id="audio"
+                                            accept=".mp3">
+                                        <br>
+                                        <br id="audioEspacios">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="submit">Guardar Recurso</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ingresar Recurso</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="" action="/modificar/recurso" method="Post" id="formRecursosM" enctype="multipart/form-data">
+
+                <div class="modal-body">
+                    <div class="tuto_container">
+                        <div class="tuto_card">
+                            <div class="imgBx">
+                                <div class="container_colum">
+                                    <div>
+                                        <label for="tipoM">Tipo Recurso:</label>
+                                        <!-- InputM -->
+                                        <select name="tipoM" id="tipoM">
+                                            <option value="palabra">Palabra</option>
+                                            <option value="trabalenguas">Trabalenguas</option>
+                                        </select>
+                                        <br>
+                                        <label for="textoM">Recurso:</label>
+                                        <textarea name="textoM" id="textoM" style="height: 100px;"
+                                            placeholder="Ingrese la Palabra o Trabalenguas"></textarea>
+                                        <br>
+                                        <label for="sicontieneM">Marque si es palabra con r:</label>
+                                        <br>
+                                        <input type="checkbox" name="sicontieneM" id="sicontieneM" value="true"><label
+                                            for="sicontieneM">Si</label>
+                                        <br><br>
+                                        <label for="" id="dificultadMM"></label>
+                                        <label id="tituloM" for="">Posición de la R:</label>
+                                        <br>
+                                        <select name="dificultadM" id="dificultadM">
+                                            <option value="ninguno">No Incluye R</option>
+                                            <option value="inicial">Posición Inicial</option>
+                                            <option value="media">Posición Media</option>
+                                            <option value="final">Posición Final</option>
+                                            <option value="inversa">Posición Inversa</option>
+                                            <option value="doble">Posición Doble</option>
+                                            <option value="mixto">Posición Mixto</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <h2 id="texto-imagen2" hidden></h2>
+
+                                        <label for="archivos">Imagen</label>
+                                        <input type="file" name="archivoM" id="archivoM"
+                                            accept=".jpg, .jpeg">
+                                        <br>
+                                        <br>
+                                        <label for="audioM" id="titleAudioM">Subir audio</label>
+                                        <input type="file" name="audioM" id="audioM"
+                                            accept=".mp3">
+                                        <br>
+                                        <br id="audioEspacio">
+                                    </div>
+                                    <input type="text" hidden name="idRecurso" value="" id="idRecurso">
+                                    <input type="text" hidden name="parametr" id="parametr">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="submit">Modificar Recurso</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+
+    $(document).ready(function () {
+
+        document.getElementById("audio").setAttribute("hidden","");
+        document.getElementById("titleAudio").setAttribute("hidden","");
+
+        $.validator.addMethod("soloLetras", function (value, element) {
+            return this.optional(element) || /^[a-z\s.A-Z]+$/i.test(value);
+        }, "Ingrese solo letras");
+
+        $("#formRecursos").validate({
+            rules: {
+                texto: {
+                    required: true,
+                    // soloLetras: true,
+                }
+            },
+            messages: {
+                texto: {
+                    required: "Este campo es requerido!"
+                },
+                archivo: {
+                    required: "Este campo es requerido!",
+                },
+                audio: {
+                    required: "Este campo es requerido!",
+                }
+            }
+        });
+
+        $('#table_id').DataTable({
+            language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                // "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Pri",
+                    "last": "Ult",
+                    "next": "Sig",
+                    "previous": "Ant"
+                }
+            },
+        });       
+    });
+</script>

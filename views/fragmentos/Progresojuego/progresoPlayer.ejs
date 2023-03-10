@@ -1,0 +1,359 @@
+<div class="container-fluid">
+   <div class="row">
+      <div class="main-header">
+         <!-- <h4>Dashboard</h4> -->
+      </div>
+   </div>
+   <!-- 4-blocks row start -->
+   <div class="row dashboard-header">
+      <div class="col-lg-3 col-md-6">
+         <div class="card dashboard-product">
+            <span>Trabalenguas</span>
+            <h2 class="dashboard-total-products">Nº <span id="traba"></span></h2>
+            <span class="label label-warning">Actividad</span>
+            <div class="side-box">
+               <i class="ti-signal text-warning-color"></i>
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+         <div class="card dashboard-product">
+            <span>Juegos de palabras</span>
+            <h2 class="dashboard-total-products">Nº <span id="memori"></span></h2>
+            <span class="label label-primary">Actividades</span>
+            <div class="side-box ">
+               <i class="ti-gift text-primary-color"></i>
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+         <div class="card dashboard-product">
+            <span>Juego de Adivinaza</span>
+            <h2 class="dashboard-total-products">Nº <span id="memoria"> </span></h2>
+            <span class="label label-success">Actividades</span>
+            <div class="side-box">
+               <i class="ti-direction-alt text-success-color"></i>
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+         <div class="card dashboard-product">
+            <span>Juego de Memoria</span>
+            <h2 class="dashboard-total-products">Nº <span id="memo"> </span></h2>
+            <span class="label label-success">Actividades</span>
+            <div class="side-box">
+               <i class="ti-direction-alt text-success-color"></i>
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+         <div class="card dashboard-product">
+            <span>Juego de Imagenes</span>
+            <h2 class="dashboard-total-products">Nº <span id="mem"></span></h2>
+            <span class="label label-danger">Actividades</span>
+            <div class="side-box">
+               <i class="ti-rocket text-danger-color"></i>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- 4-blocks row end -->
+
+   <!-- 1-3-block row start -->
+   <div class="row">
+      <div class="col-lg-4">
+         <div class="card">
+            <div class="user-block-2">
+               <img class="img-fluid" src="/assets/images/widget/paciente.png" alt="user-header">
+               <h5>
+                  <%= jugador.nombre+ " " + jugador.apellido %>
+                     <input type="text " value="<%= jugador._id%>" hidden id="juagdorid">
+               </h5>
+               <h6>Paciente</h6>
+            </div>
+            <div class="card-block">
+               <div class="user-block-2-activities">
+                  <div class="user-block-2-active">
+                     <i class="icofont icofont-clock-time"></i> Edad
+
+                     <label class="label label-primary">
+                        <%= jugador.edad %>
+                     </label>
+
+                  </div>
+               </div>
+               <div class="user-block-2-activities">
+                  <div class="user-block-2-active">
+                     <i class="icofont icofont-users"></i> Codigo de acceso
+                     <label class="label label-primary">
+                        <%= jugador.codigo_access%>
+                     </label>
+                  </div>
+               </div>
+
+               <select id="Erroradivina" hidden>
+
+               </select>
+               <select id="Aciertosadivina" hidden>
+
+               </select>
+               <select id="Errorjuegopalabra" hidden>
+
+               </select>
+               <select id="Aciertosjuegopalabra" hidden>
+
+               </select>
+               <select id="Errorjuegomemoria" hidden>
+
+               </select>
+               <select id="Aciertosjuegomemoria" hidden>
+
+               </select>
+               <select id="Errortrabalen" hidden>
+
+               </select>
+               <select id="Aciertostrabalen" hidden>
+
+               </select>
+               <select id="Errorjuegoimagenes" hidden>
+
+               </select>
+               <select id="Aciertosjuegoimagenes" hidden>
+
+               </select>
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-8">
+         <div class="card">
+            <div class="card-header">
+               <h5 class="card-header-text"> Aciertos & Errores De Actividades</h5>
+            </div>
+            <div class="card-block">
+
+               <figure>
+
+                  <canvas id="modelsChart" class="canvas">
+
+                  </canvas>
+               </figure>
+            </div>
+         </div>
+      </div>
+      <div class="row justify-content-start">
+         <div class="col-lg-6">
+            <div class="card">
+               <div class="card-header">
+                  <h5 class="card-header-text">Errores de Actividades</h5>
+               </div>
+               <div class="card-block">
+                  <figure>
+                     <canvas id="modelsChartError" class="canvas">
+
+                     </canvas>
+                  </figure>
+               </div>
+            </div>
+         </div>
+
+         <div class="col-lg-6">
+            <div class="card">
+               <div class="card-header">
+                  <h5 class="card-header-text">Aciertos Actividades</h5>
+               </div>
+               <div class="card-block">
+                  <figure>
+                     <canvas id="modelsChartAciertos" class="canvas">
+
+                     </canvas>
+                  </figure>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- <div class="col-lg-8">
+         
+      </div>
+      <div class="col-lg-8">
+         
+      </div> -->
+
+   </div>
+   <!-- 1-3-block row end -->
+
+   <!-- 2-1 block start -->
+   <div class="row">
+      <!-- <div class="col-xl-8 col-lg-12"> -->
+      <div class="card">
+         <div class="card-block">
+            <div class="table-responsive">
+               <div class="card-header border-0">
+                  <h3 class="mb-0">Detalle de las actividades realizadas</h3>
+               </div>
+               <table class="table m-b-0 photo-table" id="presentar">
+                  <thead>
+                     <tr class="text-uppercase">
+                        <th>id</th>
+                        <th>Actividad</th>
+                        <th>Fecha de realización</th>
+                        <th>Ver Detalles</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <% if (actividad.length> 0) {%>
+                        <% actividad.forEach(function(item, index) { %>
+                           <tr>
+                              <td>
+                                 <%= index + 1%>
+                              </td>
+                              <th>
+                                 <%= item.nombre_actividad%>
+                              </th>
+                              <td>
+                                 <%= item.createdAt.toISOString().substring(0,10) %>
+                              <td>
+
+                                 <button type="button" class="btn" data-toggle="modal" data-target="#exampleModalLong"
+                                    onclick="buscar('<%= item.nivel_juego %>','<%= item._id %>')">
+                                    Reporte Actividad
+                                 </button>
+
+                              </td>
+                           </tr>
+                           <% }) %>
+
+                              <% } else { %>
+                                 <td></td>
+                                 <td></td>
+                                 <td>No existen datos</td>
+                                 <td></td>
+                                 <% } %>
+
+
+                  </tbody>
+               </table>
+            </div>
+
+         </div>
+      </div>
+
+   </div>
+   <!-- 2-1 block end -->
+   <input id="jugador" value="<%=jugador._id %>" hidden>
+
+</div>
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+   aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Reporte Actividades</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <div class="table-responsive">
+               <table class="table m-b-0 photo-table" id="tabla">
+                  <thead>
+                     <tr class="text-uppercase">
+                        <th>id</th>
+                        <th>Dificultad</th>
+                        <th>Tiempo</th>
+                        <th>Nº Aciertos</th>
+                        <th>Nº Errores</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+               </table>
+               <hr>
+               <h5>Errores cometidos</h5>
+               <div style="align-items: center;">
+                  <table class="table m-b-0 photo-table" id="tabla-error">
+                     <thead>
+                        <tr class="text-uppercase">
+                           <th>Nrº</th>
+                           <th>Texto</th>
+                           <th>Imagen</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+   
+                     </tbody>
+                  </table>
+               </div>
+
+               <table class="table m-b-0 photo-table" id="tabla-error-trabalenguas">
+                  <thead>
+                     <tr class="text-uppercase">
+                        <th>Nrº</th>
+                        <th>Texto</th>
+                        <th>Errores del trabalenguas</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+               </table>
+            </div>
+         </div>
+
+      </div>
+      <div class="modal-footer">
+         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+         <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+   </div>
+</div>
+
+<script type="text/javascript" src="../js/databoar.js"></script>
+<script>
+
+   $(document).ready(function () {
+
+      $('#presentar').DataTable({
+         language: {
+            "decimal": "",
+            "emptyTable": "No hay información",
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+            "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+            //  "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Mostrar _MENU_ Entradas",
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "zeroRecords": "Sin resultados encontrados",
+            "paginate": {
+               "first": "Pri",
+               "last": "Ult",
+               "next": "Sig",
+               "previous": "Ant"
+            }
+         },
+      });
+
+      cargardatosadivia();
+      cargardatosjuegopalabras();
+      cargardatosjuegomemoria();
+      cargardatosjuegoimagenes();
+      cargardatostrabalenguas();
+      setTimeout(printCharts, 6000);
+
+      $('#myModal').on('shown.bs.modal', function () {
+
+      })
+
+
+
+   });
+
+
+</script>

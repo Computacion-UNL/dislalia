@@ -1,0 +1,105 @@
+<div class="main-content">
+    <div class="container mt-7">
+        <!-- Table -->
+        <div class="row">
+
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <% if(rol == 'Fonologo') { %> 
+                        <a href="/lista_estudiantes" class="button" style="margin: 10px;">Volver</a>
+                        <br>
+                        <br>
+                        <% } %>
+
+                        <h3 class="mb-0">Lista de Niños(as) registrados</h3>
+
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table align-items-center table-flush" id="recurso">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Nrº</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Apellido</th>
+                                    <th scope="col">Edad</th>
+                                    <% if(rol == 'Estudiante') { %> 
+                                    <th scope="col">Codigo Acceso</th>
+                                    <% } %>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- si el tamanio de palabra no es mayor a cero presenta el else  -->
+                                <% if(player.length> 0) {%>
+                                    <% player.forEach(function(item, index) { %>
+                                        <tr>
+
+                                            <td>
+                                                <%= (index + 1) %>
+                                            </td>
+                                            <td>
+                                                <%= item.nombre %>
+                                            </td>
+                                            <td>
+                                                <%= item.apellido %>
+                                            </td>
+                                            <td>
+                                                <%= item.edad %>
+                                            </td>
+                                            <% if(rol == 'Estudiante') { %> 
+                                            <td>
+                                                <%= item.codigo_access %>
+                                            </td>
+                                            <% } %>
+                                            <td>
+                                                <a href="/progreso_jugador/<%= item._id %>"><i title="Ver Actividades Realizadas" class="fa-solid fa-list-check"></i></a>
+                                            </td>
+                                            
+                                        </tr>
+                                        <% }) %>
+                                            <% } else { %>
+                                                <td></td>
+                                                <td></td>
+                                                <td>No existen datos</td>
+                                                <td></td>
+                                                <td></td>
+                                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        $('#recurso').DataTable({
+            language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                // "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Pri",
+                    "last": "Ult",
+                    "next": "Sig",
+                    "previous": "Ant"
+                }
+            },
+        });
+    });
+
+</script>
